@@ -53,24 +53,24 @@ func main() {
 
 //way2 --> using HASH TABLE
 
-// func anagram(input, output []rune) bool {
-// 	if len(input) != len(output) {
-// 		return false
-// 	}
+func anagram(input, output []rune) bool {
+	if len(input) != len(output) {
+		return false
+	}
 
-// 	counts := make(map[rune]int)
-// 	for _, r := range input {
-// 		counts[r]++
-// 	}
-// 	for _, r := range output {
-// 		counts[r]--
-// 		if counts[r] < 0 {
-// 			return false
-// 		}
-// 	}
+	counts := make(map[rune]int)
+	for _, r := range input {
+		counts[r]++
+	}
+	for _, r := range output {
+		counts[r]--
+		if counts[r] < 0 {
+			return false
+		}
+	}
 
-// 	return true
-// }
+	return true
+}
 
 //--------------------------------------------------------
 
