@@ -2,16 +2,20 @@ package main
 
 import (
 	"fmt"
+	"sort"
+	"strings"
 )
 
 func main() {
-	input := "anagram"
+	input := "anagraM"
 	output := "nagaram"
+	input = strings.ToLower(input)
+	output = strings.ToLower(output)
 
 	inputByte := []rune(input)
 	outputByte := []rune(output)
 
-	if anagram(inputByte, outputByte) {
+	if anagramWithSorting(inputByte, outputByte) {
 		fmt.Println("true")
 	} else {
 		fmt.Println("false")
@@ -49,21 +53,42 @@ func main() {
 
 //way2 --> using HASH TABLE
 
-func anagram(input, output []rune) bool {
+// func anagram(input, output []rune) bool {
+// 	if len(input) != len(output) {
+// 		return false
+// 	}
+
+// 	counts := make(map[rune]int)
+// 	for _, r := range input {
+// 		counts[r]++
+// 	}
+// 	for _, r := range output {
+// 		counts[r]--
+// 		if counts[r] < 0 {
+// 			return false
+// 		}
+// 	}
+
+// 	return true
+// }
+
+//--------------------------------------------------------
+
+//Way 3 :: sorting technique
+
+func anagramWithSorting(input, output []rune) bool {
 	if len(input) != len(output) {
 		return false
 	}
 
-	counts := make(map[rune]int)
-	for _, r := range input {
-		counts[r]++
-	}
-	for _, r := range output {
-		counts[r]--
-		if counts[r] < 0 {
-			return false
-		}
-	}
+	sort.Slice(input, func(i int, j int) bool {
+		return input[i] < input[j]
+	})
 
-	return true
+	sort.Slice(output, func(i int, j int) bool {
+		return output[i] < output[j]
+	})
+
+	return strings.EqualFold(string(input), string(output))
+
 }
